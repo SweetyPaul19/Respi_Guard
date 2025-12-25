@@ -1,0 +1,364 @@
+{
+  "document_info": {
+    "title": "Pocket Guide for Asthma Management and Prevention",
+    "publisher": "Global Initiative for Asthma (GINA)",
+    "version": "Updated 2023",
+    "target_audience": "Health Professionals",
+    "scope": ["Adults", "Adolescents", "Children 6-11 years"]
+  },
+  "abbreviations_glossary": [
+    {"term": "BDP", "definition": "Beclometasone dipropionate"},
+    {"term": "COPD", "definition": "Chronic obstructive pulmonary disease"},
+    {"term": "CYP450", "definition": "Cytochrome P450"},
+    {"term": "DPI", "definition": "Dry powder inhaler"},
+    {"term": "ED", "definition": "Emergency department"},
+    {"term": "FeNO", "definition": "Fraction of exhaled nitric oxide"},
+    {"term": "FEV1", "definition": "Forced expiratory volume in 1 second"},
+    {"term": "FVC", "definition": "Forced vital capacity"},
+    {"term": "GERD", "definition": "Gastroesophageal reflux disease"},
+    {"term": "ICS", "definition": "Inhaled corticosteroids"},
+    {"term": "ICS-LABA", "definition": "Combination ICS and LABA"},
+    {"term": "LABA", "definition": "Long-acting beta2-agonist"},
+    {"term": "LAMA", "definition": "Long-acting muscarinic antagonist"},
+    {"term": "LTRA", "definition": "Leukotriene receptor antagonist"},
+    {"term": "MART", "definition": "Maintenance and Reliever Therapy"},
+    {"term": "NSAID", "definition": "Nonsteroidal anti-inflammatory drug"},
+    {"term": "OCS", "definition": "Oral corticosteroids"},
+    {"term": "PEF", "definition": "Peak expiratory flow"},
+    {"term": "pMDI", "definition": "Pressurized metered dose inhaler"},
+    {"term": "SABA", "definition": "Short-acting beta2-agonist"},
+    {"term": "SLIT", "definition": "Sublingual immunotherapy"},
+    {"term": "TSLP", "definition": "Thymic stromal lymphopoietin"}
+  ],
+  "disease_definition": {
+    "primary_definition": "A chronic disease usually characterized by airway inflammation.",
+    "defining_features": {
+      "symptoms": ["Wheeze", "Shortness of breath", "Chest tightness", "Cough"],
+      "symptom_characteristics": ["Vary over time", "Vary in intensity"],
+      "physiologic_feature": "Variable expiratory airflow limitation"
+    },
+    "pathophysiology_mechanisms": [
+      "Bronchoconstriction (airway narrowing)",
+      "Airway wall thickening",
+      "Increased mucus"
+    ]
+  },
+  "diagnosis_logic": {
+    "symptom_patterns": {
+      "typical_characteristics": [
+        "More than one symptom (wheeze, shortness of breath, cough, chest tightness)",
+        "Symptoms occur variably over time and intensity",
+        "Symptoms often worse at night or on waking",
+        "Triggered by exercise, laughter, allergens, cold air",
+        "Worsen with viral infections"
+      ]
+    },
+    "diagnostic_evidence_criteria": {
+      "bronchodilator_reversibility": {
+        "adults_adolescents": {
+          "condition": "Post-bronchodilator FEV1 increase",
+          "threshold_volume": ">200 mL",
+          "threshold_percentage": ">12% from baseline"
+        },
+        "children": {
+          "condition": "Post-bronchodilator FEV1 increase",
+          "threshold_percentage": ">12% of predicted value"
+        }
+      },
+      "pef_variability": {
+        "calculation": "(Highest - Lowest) / Mean of Highest and Lowest",
+        "frequency": "Twice daily readings over 1-2 weeks",
+        "adult_threshold": ">10%",
+        "child_threshold": ">13%"
+      },
+      "anti_inflammatory_trial": {
+        "duration": "4 weeks",
+        "criteria_adults": "FEV1 increase >12% and >200 mL from baseline",
+        "criteria_children": "FEV1 increase >12% of predicted"
+      }
+    },
+    "diagnostic_flowchart_steps": [
+      {
+        "step_id": 1,
+        "query": "Does patient have respiratory symptoms typical of asthma?",
+        "if_no": "Further history and tests for alternative diagnoses."
+      },
+      {
+        "step_id": 2,
+        "query": "Does detailed history/examination support asthma diagnosis?",
+        "if_no": "Further history and tests for alternative diagnoses."
+      },
+      {
+        "step_id": 3,
+        "query": "Is patient already taking ICS-containing treatment?",
+        "if_yes": "See GINA 2023 report for diagnostic steps in treated patients.",
+        "if_no": "Perform spirometry/PEF with reversibility test."
+      },
+      {
+        "step_id": 4,
+        "query": "Do results support asthma diagnosis?",
+        "if_yes": "Treat for ASTHMA.",
+        "if_no": "Repeat testing (symptomatic/early morning/withholding meds) or Arrange other tests (bronchial challenge)."
+      },
+      {
+        "step_id": "Empiric Treatment Path",
+        "condition": "Clinical urgency and other diagnoses unlikely",
+        "action": "Start empiric initial treatment -> Review response in 1-3 months."
+      }
+    ]
+  },
+  "assessment_protocols": {
+    "symptom_control_assessment": {
+      "time_window": "Past 4 weeks",
+      "questions": [
+        "Daytime symptoms >2/week?",
+        "Any night waking due to asthma?",
+        "SABA reliever needed >2/week?",
+        "Any activity limitation due to asthma?"
+      ],
+      "scoring_levels": {
+        "well_controlled": "0 questions answered Yes",
+        "partly_controlled": "1-2 questions answered Yes",
+        "uncontrolled": "3-4 questions answered Yes"
+      }
+    },
+    "risk_factors": {
+      "exacerbation_risk_independent_of_symptoms": [
+        "Uncontrolled asthma symptoms",
+        "SABA overuse (>=3 canisters/year)",
+        "Inadequate ICS (not prescribed, poor adherence, incorrect technique)",
+        "Low FEV1 (<60% predicted)",
+        "High bronchodilator responsiveness",
+        "Major psychological problems (anxiety, depression)",
+        "Exposures (smoking, allergens, pollution)",
+        "Comorbidities (obesity, rhinosinusitis, GERD, food allergy, pregnancy)",
+        "Type 2 inflammatory markers (high eosinophils, high FeNO)",
+        "History of intubation/ICU for asthma",
+        "One or more severe exacerbations in last 12 months"
+      ],
+      "persistent_airflow_limitation_risks": [
+        "Preterm birth / low birth weight",
+        "Chronic mucus hypersecretion",
+        "Lack of ICS treatment with history of severe exacerbation",
+        "Tobacco smoke/chemical exposure",
+        "Low FEV1",
+        "Sputum or blood eosinophilia"
+      ],
+      "medication_side_effect_risks": [
+        "Frequent OCS",
+        "Long-term high-dose/potent ICS",
+        "Taking P450 inhibitors (ritonavir, ketoconazole, itraconazole)"
+      ]
+    }
+  },
+  "treatment_tracks_adults_adolescents": {
+    "track_1": {
+      "status": "Preferred",
+      "controller": "ICS-formoterol",
+      "reliever": "As-needed low-dose ICS-formoterol",
+      "mechanism_benefit": "Reduces risk of severe exacerbations compared to SABA reliever regimens; simpler regimen.",
+      "usage_steps": {
+        "step_1": "As-needed only low dose ICS-formoterol.",
+        "step_2": "As-needed only low dose ICS-formoterol.",
+        "step_3": "Low dose maintenance ICS-formoterol + As-needed reliever.",
+        "step_4": "Medium dose maintenance ICS-formoterol + As-needed reliever.",
+        "step_5": "Add-on LAMA; Refer for assessment; Consider high dose maintenance ICS-formoterol."
+      }
+    },
+    "track_2": {
+      "status": "Alternative",
+      "controller": "ICS-containing maintenance",
+      "reliever": "As-needed SABA or As-needed ICS-SABA",
+      "safety_prerequisite": "Check if patient is likely to adhere to daily controller. Otherwise, risk of SABA-only outcomes.",
+      "usage_steps": {
+        "step_1": "Take low dose ICS whenever SABA taken.",
+        "step_2": "Low dose maintenance ICS daily.",
+        "step_3": "Low dose maintenance ICS-LABA daily.",
+        "step_4": "Medium/High dose maintenance ICS-LABA daily.",
+        "step_5": "Add-on LAMA; Refer for assessment; Consider high dose ICS-LABA."
+      }
+    }
+  },
+  "initial_treatment_selection_logic": {
+    "adults_adolescents": [
+      {
+        "symptoms": "Less than 4-5 days a week",
+        "track_1_recommendation": "Steps 1-2: As-needed low dose ICS-formoterol",
+        "track_2_recommendation": "Step 1: Take ICS whenever SABA taken"
+      },
+      {
+        "symptoms": "Most days OR waking with asthma once a week or more",
+        "track_1_recommendation": "Step 3: Low dose maintenance ICS-formoterol",
+        "track_2_recommendation": "Step 3: Low dose maintenance ICS-LABA"
+      },
+      {
+        "symptoms": "Daily symptoms OR waking with asthma once a week or more AND Low lung function",
+        "track_1_recommendation": "Step 4: Medium dose maintenance ICS-formoterol",
+        "track_2_recommendation": "Step 4: Medium/High dose maintenance ICS-LABA"
+      },
+      {
+        "presentation": "Severely uncontrolled asthma or acute exacerbation",
+        "action": "Short course OCS; Start High Dose ICS or Medium Dose ICS-formoterol (Step 4)"
+      }
+    ],
+    "children_6_11_years": [
+      {
+        "symptoms": "Less than twice a month",
+        "recommendation": "Step 1: Low dose ICS whenever SABA taken"
+      },
+      {
+        "symptoms": "Twice a month or more, but less than daily",
+        "recommendation": "Step 2: Daily low dose ICS"
+      },
+      {
+        "symptoms": "Most days OR waking with asthma once a week or more",
+        "recommendation": "Step 3: Low dose ICS-LABA OR Medium dose ICS OR Very low dose ICS-formoterol MART"
+      },
+      {
+        "symptoms": "Most days OR waking with asthma once a week or more AND Low lung function",
+        "recommendation": "Step 4: Medium dose ICS-LABA OR Low dose ICS-formoterol MART; Refer for expert advice"
+      }
+    ]
+  },
+  "medication_dosage_tables": {
+    "adults_adolescents_ics_daily_mcg": [
+      {"drug": "Beclometasone dipropionate (pMDI, HFA)", "low_dose": "200-500", "medium_dose": ">500-1000", "high_dose": ">1000"},
+      {"drug": "Beclometasone dipropionate (DPI or pMDI extrafine)", "low_dose": "100-200", "medium_dose": ">200-400", "high_dose": ">400"},
+      {"drug": "Budesonide (DPI or pMDI)", "low_dose": "200-400", "medium_dose": ">400-800", "high_dose": ">800"},
+      {"drug": "Ciclesonide (extrafine)", "low_dose": "80-160", "medium_dose": ">160-320", "high_dose": ">320"},
+      {"drug": "Fluticasone furoate (DPI)", "low_dose": "100", "medium_dose": "100", "high_dose": "200"},
+      {"drug": "Fluticasone propionate (DPI)", "low_dose": "100-250", "medium_dose": ">250-500", "high_dose": ">500"},
+      {"drug": "Fluticasone propionate (pMDI)", "low_dose": "100-250", "medium_dose": ">250-500", "high_dose": ">500"},
+      {"drug": "Mometasone furoate (DPI)", "low_dose": "200", "medium_dose": "200", "high_dose": "400"},
+      {"drug": "Mometasone furoate (pMDI)", "low_dose": "200-400", "medium_dose": "400", "high_dose": ">400"}
+    ],
+    "children_6_11_ics_daily_mcg": [
+      {"drug": "Beclometasone dipropionate (pMDI, HFA)", "low_dose": "100-200", "medium_dose": ">200-400", "high_dose": ">400"},
+      {"drug": "Beclometasone dipropionate (extrafine)", "low_dose": "50-100", "medium_dose": ">100-200", "high_dose": ">200"},
+      {"drug": "Budesonide (DPI)", "low_dose": "100-200", "medium_dose": ">200-400", "high_dose": ">400"},
+      {"drug": "Budesonide (nebules)", "low_dose": "250-500", "medium_dose": ">500-1000", "high_dose": ">1000"},
+      {"drug": "Ciclesonide (extrafine)", "low_dose": "80", "medium_dose": ">80-160", "high_dose": ">160"},
+      {"drug": "Fluticasone furoate (DPI)", "low_dose": "50", "medium_dose": "N/A", "high_dose": "N/A"},
+      {"drug": "Fluticasone propionate (DPI)", "low_dose": "50-100", "medium_dose": ">100-200", "high_dose": ">200"},
+      {"drug": "Fluticasone propionate (pMDI)", "low_dose": "50-100", "medium_dose": ">100-200", "high_dose": ">200"},
+      {"drug": "Mometasone furoate (pMDI)", "low_dose": "100", "medium_dose": "200", "high_dose": ">200"}
+    ],
+    "track_1_mart_regimens": {
+      "budesonide_formoterol_dpi_200_6": {
+        "step_1_2": "1 inhalation whenever needed",
+        "step_3": "1 inhalation once daily PLUS 1 inhalation whenever needed",
+        "step_4": "1 inhalation twice daily PLUS 1 inhalation whenever needed",
+        "step_5": "2 inhalations twice daily PLUS 1 inhalation whenever needed",
+        "max_daily_limit": "12 inhalations total (72 mcg formoterol)"
+      },
+      "beclometasone_formoterol_pmdi_100_6": {
+        "step_3": "1 inhalation twice daily PLUS 1 inhalation whenever needed",
+        "step_4": "2 inhalations twice daily PLUS 1 inhalation whenever needed",
+        "step_5": "2 inhalations twice daily PLUS 1 inhalation whenever needed",
+        "max_daily_limit": "8 inhalations total (48 mcg formoterol)"
+      }
+    }
+  },
+  "exacerbation_management_protocols": {
+    "primary_care_assessment_adults": {
+      "mild_moderate": {
+        "clinical_signs": ["Talks in phrases", "Prefers sitting to lying", "Not agitated", "Respiratory rate increased", "Accessory muscles not used"],
+        "vitals": {"pulse": "100-120 bpm", "o2_sat": "90-95%"},
+        "lung_function": "PEF >50% predicted or best",
+        "treatment": {
+          "saba": "4-10 puffs by pMDI + spacer, repeat every 20 mins for 1 hour",
+          "prednisolone": "40-50 mg (Adults), 1-2 mg/kg max 40 mg (Children)",
+          "oxygen": "Target saturation 93-95% (Adults), 94-98% (Children)"
+        }
+      },
+      "severe": {
+        "clinical_signs": ["Talks in words", "Sits hunched forwards", "Agitated", "Respiratory rate >30/min", "Accessory muscles in use"],
+        "vitals": {"pulse": ">120 bpm", "o2_sat": "<90%"},
+        "lung_function": "PEF <=50% predicted or best",
+        "treatment": "Transfer to acute care facility. While waiting: Give SABA, Ipratropium bromide, Oxygen, Systemic corticosteroid"
+      },
+      "life_threatening": {
+        "clinical_signs": ["Drowsy", "Confused", "Silent chest"],
+        "treatment": "URGENT transfer to acute care facility"
+      }
+    },
+    "written_action_plan_instructions": {
+      "for_track_1_patients": {
+        "reliever_instruction": "Take extra doses of low-dose ICS-formoterol whenever needed.",
+        "maintenance_instruction": "Continue usual maintenance doses.",
+        "medical_attention_threshold": "Rapidly deteriorating OR needing >12 inhalations/day (Budesonide-Formoterol) or >8 inhalations/day (Beclometasone-Formoterol)."
+      },
+      "for_track_2_patients_saba_reliever": {
+        "reliever_instruction": "Take SABA when needed.",
+        "maintenance_instruction_ics_only": "Increase maintenance ICS dose by 4x (Adults). Note: 5x increase in children not likely effective.",
+        "maintenance_instruction_ics_formoterol": "Increase maintenance dose to 4x usual dose (observe daily max).",
+        "maintenance_instruction_ics_other_laba": "Step up to higher dose formulation or add separate ICS inhaler.",
+        "medical_attention_threshold": "Rapidly deteriorating OR need SABA again within 3 hours."
+      }
+    }
+  },
+  "special_populations_guidance": {
+    "covid_19": {
+      "medication_advice": "Continue ICS and biologics. Stopping ICS increases risk of dangerous worsening. Avoid nebulizers to prevent viral transmission.",
+      "risk_clarification": "People with well-controlled asthma NOT at increased risk of severe COVID-19. Risk increases if recent OCS use or hospitalization.",
+      "vaccination": "Recommended. Do not administer biologic and vaccine on same day.",
+      "drug_interaction_warning": "Ritonavir-boosted nirmatrelvir (Paxlovid) interaction with Salmeterol or Vilanterol may cause cardiac toxicity."
+    },
+    "pregnancy": {
+      "monitoring_frequency": "Every 4-6 weeks.",
+      "medication_safety": "Benefits of active treatment outweigh potential risks. Do NOT step down treatment. Treat exacerbations aggressively.",
+      "labor_delivery": "Stress-dose hydrocortisone if on high-dose ICS or OCS >2 weeks in last 6 months."
+    },
+    "surgery": {
+      "protocol": "Achieve good control pre-op. Maintain ICS. Give stress-dose hydrocortisone if on long-term high-dose ICS or recent OCS."
+    },
+    "obesity": {
+      "impact": "Weight loss of 5-10% can improve asthma control."
+    },
+    "aspirin_exacerbated_respiratory_disease_aerd": {
+      "clinical_triad": "Severe asthma + Nasal polyposis + Reaction to NSAIDs.",
+      "management": "Avoid NSAIDs. ICS is mainstay. LTRA may be useful. Desensitization possible in specialist centers."
+    }
+  },
+  "inhaler_technique_adherence": {
+    "technique_failure_rate": "Up to 80% of patients cannot use inhaler correctly.",
+    "intervention_steps": [
+      "Choose appropriate device for patient skills/cost",
+      "Check technique against checklist",
+      "Correct with physical demonstration",
+      "Re-check 2-3 times"
+    ],
+    "adherence_failure_rate": "At least 50% of adults/children do not take medications as prescribed.",
+    "proven_interventions": [
+      "Shared decision-making",
+      "Electronic inhaler reminders",
+      "Home visits",
+      "Reviewing dispensing records"
+    ]
+  },
+  "glossary_medication_mechanisms": {
+    "ics": {
+      "role": "Most effective anti-inflammatory. Reduces symptoms/exacerbations.",
+      "side_effects_local": "Oropharyngeal candidiasis, dysphonia.",
+      "side_effects_systemic": "Osteoporosis, cataract, glaucoma (long-term high dose)."
+    },
+    "laba": {
+      "safety_warning": "Should NOT be used without ICS in asthma.",
+      "side_effects": "Tachycardia, headache, cramps."
+    },
+    "ltra": {
+      "efficacy": "Less effective than ICS.",
+      "safety_warning": "FDA boxed warning for Montelukast (serious mental health effects)."
+    },
+    "lama": {
+      "role": "Add-on at Step 5. Modest lung function improvement. No symptom benefit."
+    },
+    "biologics": {
+      "anti_ige": "Omalizumab (Severe allergic)",
+      "anti_il5": "Mepolizumab, Reslizumab (Severe eosinophilic)",
+      "anti_il5r": "Benralizumab (Severe eosinophilic)",
+      "anti_il4r": "Dupilumab (Severe Type 2)",
+      "anti_tslp": "Tezepelumab (Severe asthma)"
+    }
+  }
+}

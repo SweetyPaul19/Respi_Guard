@@ -1,0 +1,310 @@
+{
+  "document_metadata": {
+    "title": "International Health Regulations (2005)",
+    "edition": "Third Edition",
+    "publication_year": 2016,
+    "publisher": "World Health Organization (WHO)",
+    "isbn": "978 92 4 158049 6",
+    "purpose": "To prevent, protect against, control and provide a public health response to the international spread of disease in ways that are commensurate with and restricted to public health risks, and which avoid unnecessary interference with international traffic and trade.",
+    "legal_context": "Adopted by the 58th World Health Assembly (2005); Entered into force 15 June 2007. Replaces the International Sanitary Regulations of 1969.",
+    "key_updates_in_3rd_edition": "Includes the 2014 amendment to Annex 7 regarding Yellow Fever vaccination validity (life of person)."
+  },
+  "part_i_definitions_and_principles": {
+    "article_1_definitions": {
+      "affected": "Persons, baggage, cargo, containers, conveyances, goods, postal parcels or human remains that are infected or contaminated, or carry sources of infection or contamination.",
+      "affected_area": "A geographical location specifically for which health measures have been recommended by WHO.",
+      "contamination": "Presence of an infectious or toxic agent or matter on a human/animal body surface, in/on a product for consumption, or on other inanimate objects (including conveyances).",
+      "disease": "An illness or medical condition, irrespective of origin or source, that presents or could present significant harm to humans.",
+      "event": "A manifestation of disease or an occurrence that creates a potential for disease.",
+      "free_pratique": "Permission for a ship/aircraft/ground vehicle to enter a port/airport/station, embark/disembark, and discharge/load cargo or stores.",
+      "health_measure": "Procedures applied to prevent the spread of disease or contamination; does not include law enforcement or security measures.",
+      "ill_person": "Individual suffering from or affected with a physical ailment that may pose a public health risk.",
+      "infection": "Entry and development or multiplication of an infectious agent in the body of humans and animals that may constitute a public health risk.",
+      "intrusive": "Possibly provoking discomfort through close or intimate contact or questioning.",
+      "invasive": "Puncture or incision of the skin or insertion of an instrument or foreign material into the body or the examination of a body cavity.",
+      "isolation": "Separation of ill or contaminated persons or affected items from others to prevent spread of infection/contamination.",
+      "public_health_emergency_of_international_concern_pheic": "An extraordinary event which is determined to: (i) constitute a public health risk to other States through the international spread of disease and (ii) potentially require a coordinated international response.",
+      "public_health_observation": "Monitoring of the health status of a traveller over time for the purpose of determining the risk of disease transmission.",
+      "quarantine": "Restriction of activities and/or separation from others of suspect persons who are not ill (or suspect items) to prevent possible spread of infection/contamination.",
+      "scientific_evidence": "Information furnishing a level of proof based on the established and accepted methods of science.",
+      "standing_recommendation": "Non-binding advice issued by WHO for specific ongoing public health risks for routine or periodic application.",
+      "temporary_recommendation": "Non-binding advice issued by WHO for a time-limited, risk-specific basis in response to a PHEIC.",
+      "traveller": "A natural person undertaking an international voyage.",
+      "verification": "Provision of information by a State Party to WHO confirming the status of an event within its territory."
+    },
+    "article_2_scope": "Prevent, protect against, control and provide response to international spread of disease commensurate with risks and avoiding unnecessary interference with traffic and trade.",
+    "article_3_principles": [
+      "Full respect for dignity, human rights and fundamental freedoms of persons.",
+      "Guided by the UN Charter and WHO Constitution.",
+      "Goal of universal application.",
+      "States have sovereign right to legislate health policies, provided they uphold IHR purposes."
+    ],
+    "article_4_responsible_authorities": {
+      "national_ihr_focal_point": "National center designated by each State Party, accessible at all times for communication with WHO.",
+      "who_ihr_contact_points": "Units within WHO accessible at all times for communication with National IHR Focal Points."
+    }
+  },
+  "part_ii_information_and_public_health_response": {
+    "article_5_surveillance": {
+      "obligation": "State Parties must develop, strengthen, and maintain capacity to detect, assess, notify, and report events.",
+      "timeline": "Within 5 years of entry into force (possible 2-year extension + exceptional 2-year extension)."
+    },
+    "article_6_notification": {
+      "requirement": "Notify WHO within 24 hours of assessment of public health information of all events which may constitute a PHEIC within its territory using the decision instrument (Annex 2).",
+      "ongoing_reporting": "Continue to communicate timely, accurate, and sufficiently detailed public health information."
+    },
+    "article_7_unexpected_events": "If a State Party has evidence of an unexpected or unusual public health event that may constitute a PHEIC, it shall provide all relevant info to WHO.",
+    "article_8_consultation": "States may keep WHO advised of events not requiring notification (Article 6) and consult on health measures.",
+    "article_9_other_reports": {
+      "third_party_reports": "WHO may take into account reports from sources other than notifications (e.g., unofficial reports). WHO must attempt verification with the State Party.",
+      "external_risk_notification": "States shall inform WHO within 24 hours of receipt of evidence of a public health risk identified outside their territory (imported cases, vectors, contaminated goods)."
+    },
+    "article_10_verification": {
+      "who_request": "WHO shall request verification from State Party regarding reports from other sources.",
+      "state_response_time": "State Party must provide initial reply/acknowledgement within 24 hours and available information within 24 hours."
+    },
+    "article_11_provision_of_info_by_who": {
+      "confidentiality": "WHO sends info to States in confidence.",
+      "public_disclosure_triggers": [
+        "Event is determined to be a PHEIC.",
+        "Info evidencing international spread is confirmed.",
+        "Control measures are unlikely to succeed.",
+        "State lacks operational capacity.",
+        "Nature/scope requires immediate international control measures."
+      ]
+    },
+    "article_12_determination_of_pheic": {
+      "authority": "Director-General determines PHEIC based on info, Annex 2, Emergency Committee advice, scientific principles, and risk assessment.",
+      "consultation": "DG consults with the State Party where the event arises. If no consensus within 48 hours, determination follows Article 49 procedure."
+    },
+    "article_13_public_health_response": {
+      "capacity": "States must develop capacity to respond promptly and effectively to risks/PHEIC.",
+      "who_assistance": "WHO collaborates by providing technical guidance, assessing effectiveness of control measures, and mobilizing international expert teams (on request)."
+    }
+  },
+  "part_iii_recommendations": {
+    "article_15_temporary_recommendations": {
+      "trigger": "PHEIC determination.",
+      "content": "Health measures regarding persons, baggage, cargo, containers, conveyances, goods.",
+      "duration": "Expire 3 months after issuance; can be extended for 3 months at a time; max duration is the second World Health Assembly after PHEIC determination."
+    },
+    "article_16_standing_recommendations": "For routine/periodic application for specific ongoing public health risks.",
+    "article_18_specific_measures": {
+      "persons": [
+        "No specific health measures",
+        "Review travel history",
+        "Review proof of medical exam/vaccination",
+        "Require medical exam/vaccination",
+        "Public health observation",
+        "Quarantine",
+        "Isolation/treatment",
+        "Tracing contacts",
+        "Refuse entry",
+        "Exit screening"
+      ],
+      "goods_conveyances": [
+        "Review manifest/routing",
+        "Inspection",
+        "Treatment (disinfection, disinsection, etc.)",
+        "Isolation/quarantine",
+        "Seizure/destruction",
+        "Refuse departure/entry"
+      ]
+    }
+  },
+  "part_iv_points_of_entry": {
+    "article_19_general_obligations": "Ensure capacities (Annex 1) are developed; Identify competent authorities.",
+    "article_20_airports_and_ports": {
+      "designation": "States designate airports/ports to develop Annex 1 capacities.",
+      "certification": "Ship Sanitation Control (Exemption) Certificates must be issued (Annex 3). WHO publishes list of authorized ports."
+    },
+    "article_21_ground_crossings": "Designate where justified by public health reasons/traffic volume.",
+    "article_22_role_of_competent_authorities": {
+      "duties": [
+        "Monitor arriving/departing baggage, cargo, etc.",
+        "Ensure facilities are sanitary and free of infection sources.",
+        "Supervise deratting, disinfection, disinsection.",
+        "Advise operators of control measures.",
+        "Supervise disposal of contaminated waste."
+      ]
+    }
+  },
+  "part_v_public_health_measures": {
+    "chapter_i_general": {
+      "article_23_arrival_departure": {
+        "allowed_actions": "Review itinerary, health documents, non-invasive medical exam, inspection of goods.",
+        "informed_consent": "No medical exam/vaccination without prior express informed consent (except when evidence of imminent public health risk exists)."
+      }
+    },
+    "chapter_ii_conveyances": {
+      "article_24_operators": "Must comply with health measures, inform travelers, and keep conveyances free of infection sources.",
+      "article_25_ships_aircraft_transit": "No health measures applied to ships/aircraft in transit (not coming from affected area) unless they embark/disembark.",
+      "article_27_affected_conveyances": {
+        "definition": "Conveyance with clinical signs/symptoms or evidence of public health risk on board.",
+        "action": "Disinfect, decontaminate, disinsect, derat. If competent authority cannot carry out measures, conveyance may depart under condition that next point of entry is informed."
+      },
+      "article_28_entry_rights": "Ships/aircraft shall not be refused free pratique for public health reasons (subject to inspection/treatment)."
+    },
+    "chapter_iii_travellers": {
+      "article_30_observation": "Suspect traveller under observation may continue voyage if they do not pose imminent risk and reporting is arranged.",
+      "article_31_entry": {
+        "conditions": "Invasive exam/vaccination not required as condition of entry EXCEPT when necessary to determine risk or as condition for residence.",
+        "refusal": "If traveller refuses consent, entry may be denied. If imminent risk exists, State may compel exam/vaccination/quarantine."
+      },
+      "article_32_treatment": "Treat with respect for dignity/human rights; provide food/water/accommodation/medical treatment."
+    }
+  },
+  "part_vi_health_documents": {
+    "article_35_general_rule": "No health documents required other than those in IHR (or WHO recommendations).",
+    "article_36_vaccination_certificates": "Must conform to Annex 6 (and Annex 7 for specific diseases). Valid certificate prevents denial of entry.",
+    "article_37_maritime_declaration_of_health": "Master of ship must ascertain health on board and complete declaration (Annex 8) upon arrival if required by State.",
+    "article_38_aircraft_general_declaration": "Pilot must complete Health Part of Aircraft General Declaration (Annex 9) if required.",
+    "article_39_ship_sanitation_certificates": {
+      "validity": "6 months (extendable by 1 month).",
+      "types": "Control Certificate (measures applied) or Exemption Certificate (no evidence of risk found)."
+    }
+  },
+  "part_vii_charges": {
+    "article_40_travellers": {
+      "prohibited_charges": "No charge for: medical exam to ascertain health status, vaccination on arrival (if not published 10 days prior), isolation/quarantine, certificates, baggage measures.",
+      "allowed_charges": "Other health measures.",
+      "rules": "Must conform to published tariff, not exceed actual cost, no discrimination by nationality."
+    },
+    "article_41_goods": "Charges allowed but must conform to tariff, not exceed cost, no discrimination."
+  },
+  "part_ix_governance": {
+    "article_47_roster_of_experts": "DG establishes roster of experts in relevant fields.",
+    "article_48_emergency_committee": {
+      "role": "Provide views on whether event is PHEIC and on temporary recommendations.",
+      "composition": "Selected from Roster of Experts."
+    },
+    "article_49_procedure": "DG convenes committee; State Party presents views; Committee forwards views to DG; DG makes final determination.",
+    "article_50_review_committee": {
+      "role": "Technical recommendations on IHR amendments, standing recommendations, and functioning of Regulations."
+    }
+  },
+  "annex_1_core_capacity_requirements": {
+    "A_surveillance_and_response": {
+      "local_level": "Detect events involving disease/death above expected levels; Report essential info immediately; Implement preliminary control measures.",
+      "intermediate_level": "Confirm status of reported events; Assess immediately; Report urgent events to national level.",
+      "national_level": {
+        "assessment": "Assess all reports of urgent events within 48 hours; Notify WHO immediately.",
+        "response": "Determine control measures; Provide specialized staff/lab analysis/logistics; On-site assistance; 24-hour operation."
+      }
+    },
+    "B_designated_ports_airports_crossings": {
+      "at_all_times": "Access to medical service/diagnostics; Transport for ill travellers; Inspection of conveyances; Safe environment (water/food/waste); Vector control.",
+      "during_pheic": "Public health emergency contingency plan; Isolation/treatment arrangements; Space for interviewing suspects; Assessment/quarantine facilities; Entry/exit controls."
+    }
+  },
+  "annex_2_decision_instrument_algorithm": {
+    "mandatory_notification_diseases": [
+      "Smallpox",
+      "Poliomyelitis due to wild-type poliovirus",
+      "Human influenza caused by a new subtype",
+      "Severe acute respiratory syndrome (SARS)"
+    ],
+    "algorithm_logic": {
+      "step_1": "Is the public health impact serious?",
+      "step_2": "Is the event unusual or unexpected?",
+      "step_3": "Is there a significant risk of international spread?",
+      "step_4": "Is there a significant risk of international travel or trade restrictions?",
+      "notification_rule": "If the event meets at least TWO of the four criteria (I-IV), notify WHO."
+    },
+    "always_utilize_algorithm_diseases": [
+      "Cholera",
+      "Pneumonic plague",
+      "Yellow fever",
+      "Viral haemorrhagic fevers (Ebola, Lassa, Marburg)",
+      "West Nile fever",
+      "Diseases of special regional concern (e.g., dengue, Rift Valley fever, meningococcal disease)"
+    ],
+    "criteria_guidance": {
+      "serious_impact": "High case numbers, high case fatality, treatment failure, health staff affected, vulnerable population.",
+      "unusual_unexpected": "Unknown agent, severe evolution, eliminated disease re-emerging.",
+      "international_spread": "Cross-border movement, index case with travel history, international gathering, environmental contamination.",
+      "restrictions_risk": "Similar events caused restrictions in past, suspected food/water source exported, international media interest."
+    }
+  },
+  "annex_3_ship_sanitation_certificates_model": {
+    "areas_inspected": [
+      "Galley",
+      "Pantry",
+      "Stores",
+      "Hold(s)/cargo",
+      "Quarters (crew, officers, passengers)",
+      "Potable water",
+      "Sewage",
+      "Ballast tanks",
+      "Solid/medical waste",
+      "Engine room",
+      "Medical facilities"
+    ],
+    "outcomes": {
+      "exemption_certificate": "No evidence found. Exempted from control measures.",
+      "control_certificate": "Evidence found. Control measures applied."
+    }
+  },
+  "annex_4_conveyance_technical_requirements": {
+    "operators": "Facilitate inspections/exams; Provide valid certificates.",
+    "measures": "Avoid injury/discomfort to persons or damage to goods. Apply when empty if possible."
+  },
+  "annex_5_vector_borne_diseases": {
+    "requirements": "Conveyances leaving area where vector control is recommended should be disinsected. States should maintain vector control programmes 400 meters from point of entry facilities."
+  },
+  "annex_6_vaccination_certificates_rules": {
+    "validity": "Only if vaccine approved by WHO.",
+    "signature": "Signed by clinician (medical practitioner or authorized worker). Official stamp required (stamp is not a substitute for signature).",
+    "language": "English or French (additional languages allowed).",
+    "individual": "Certificates are individual; separate ones for children (signed by parent if child cannot write).",
+    "contraindication": "Clinician must provide written reasons if vaccination is contraindicated."
+  },
+  "annex_7_yellow_fever_requirements": {
+    "disease_specifics": {
+      "incubation": "6 days.",
+      "protection_start": "10 days after administration.",
+      "protection_duration": "Life of the person vaccinated."
+    },
+    "certificate_validity": "Life of the person vaccinated, beginning 10 days after vaccination.",
+    "entry_conditions": {
+      "requirement": "Vaccination may be required for travellers leaving an area with risk of transmission.",
+      "quarantine": "Traveller without valid certificate coming from risk area may be quarantined until certificate becomes valid OR for max 6 days."
+    }
+  },
+  "annex_8_maritime_declaration_of_health": {
+    "questions": [
+      "Has any person died on board?",
+      "Is there any case of infectious disease suspected?",
+      "Total number of ill passengers greater than normal?",
+      "Is there any ill person on board now?",
+      "Was a medical practitioner consulted?",
+      "Are you aware of any condition that may lead to infection spread?",
+      "Has any sanitary measure (quarantine, disinfection) been applied?",
+      "Have any stowaways been found?",
+      "Is there a sick animal/pet?"
+    ],
+    "symptoms_to_report": "Fever persisting for days, glandular swelling, jaundice, cough/shortness of breath, unusual bleeding, paralysis, acute skin rash, severe vomiting/diarrhoea, recurrent convulsions."
+  },
+  "annex_9_aircraft_general_declaration": {
+    "health_part": "Declaration of illnesses (fever >38C/100F + signs), details of disinsecting/sanitary treatment."
+  },
+  "appendix_2_reservations": {
+    "india": {
+      "reservation": "Reserves right to consider whole territory of a country infected with Yellow Fever if notified under Article 6. Reserves right to regard area as infected until definite evidence of eradication.",
+      "implication": "Yellow Fever treated as PHEIC; disinsection and quarantine requirements continued."
+    },
+    "usa": {
+      "reservation": "Obligations assumed in manner consistent with fundamental principles of federalism. Implementation by Federal Govt or State Govts depending on jurisdiction.",
+      "understanding_1": "Notification obligation covers natural, accidental, or deliberate releases (biological, chemical, radionuclear).",
+      "understanding_2": "Article 9 notification of external risks not required if it undermines US Armed Forces security operations.",
+      "understanding_3": "IHR does not create judicially enforceable private rights."
+    },
+    "china": {
+      "declaration": "IHR applies to entire territory including Hong Kong SAR, Macau SAR, and Taiwan Province."
+    },
+    "turkey": {
+      "statement": "Will implement IHR in accordance with Montreux Convention (1936) regarding Turkish Straits.",
+      "conflict": "Greece and EU object that Turkish regulations (suspension of traffic) contravene Montreux Convention and international law."
+    }
+  }
+}

@@ -1,0 +1,9 @@
+jq
+flask 
+flask-cors 
+requests
+python-dotenv 
+langchain-google-genai 
+langchain-community 
+langchain-pinecone
+pinecone-client
