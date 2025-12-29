@@ -3,3 +3,6 @@ server/venv/
 
 server/firebase-admin-key.json
 server/__pycache__/
+
+client/.env
+client/node_modules/

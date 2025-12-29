@@ -1,8 +1,6 @@
 import os
 import re
 from twilio.rest import Client
-import firebase_admin
-from firebase_admin import credentials, firestore
 from flask import jsonify, request
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnablePassthrough
@@ -11,10 +9,6 @@ from langchain_core.output_parsers import StrOutputParser
 TWILIO_SID = os.getenv("TWILIO_ACCOUNT_SID")
 TWILIO_AUTH = os.getenv("TWILIO_AUTH_TOKEN")
 TWILIO_FROM = os.getenv("TWILIO_FROM_NUMBER")
-
-cred = credentials.Certificate("firebase-admin-key.json") #<-- same name as of the key file
-firebase_admin.initialize_app(cred)
-db = firestore.client()
 
 
 # ================== SOS PROMPT ==================
@@ -43,7 +37,7 @@ RESPONSE:
 
 
 
-def register_routes(app, retriever, llm):
+def register_routes(app, retriever, llm, db):
     def format_docs(docs):
         return "\n".join([d.page_content for d in docs])
 
@@ -108,11 +102,11 @@ def register_routes(app, retriever, llm):
         else:
             print("⚠️ Using Mock Database for Demo")
             # This is what judges will see if DB fails
-            user_name = "Arnab (Demo)"
+            user_name = "Arnab"
             user_age = "20"
             condition = "Bronchial Asthma"
             meds = "Budesonide, Salbutamol (SOS)"
-            raw_phone = "+91 99074 01925"
+            raw_phone = "+919907401925"
 
         # Sanitize Phone
         guardian_phone = re.sub(r"[^\d+]", "", raw_phone)

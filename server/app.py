@@ -4,6 +4,10 @@ import requests
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
+import datetime
+
+import firebase_admin
+from firebase_admin import credentials, firestore
 
 from langchain_google_genai import (
     GoogleGenerativeAIEmbeddings,
@@ -29,9 +33,19 @@ PINECONE_INDEX_NAME = "respi-guard"
 
 # print("GOOGLE_API_KEY:", GOOGLE_API_KEY if GOOGLE_API_KEY else "NOT FOUND")
 
+#firebase setup
+try:
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("firebase-admin-key.json")
+        firebase_admin.initialize_app(cred)
+    db = firestore.client()
+    print("🔥 Firebase Admin Connected in app.py")
+except Exception as e:
+    print(f"⚠️ Firebase Setup Error: {e}")
+    print("Running in MOCK DB mode.")
+    db = None
 
-######################################################################################################################
-#conds and function for API 1:advisory + AQI 
+
 
 # VECTOR STORE
 embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
@@ -48,6 +62,8 @@ llm = ChatGoogleGenerativeAI(
 )
 
 
+######################################################################################################################
+#conds and function for API 1:advisory + AQI 
 
 # The "Smart" AQI Converter
 def calculate_indian_aqi(pm2_5):   #### <---Indian Context
@@ -121,6 +137,28 @@ def get_live_aqi(lat, lon):
         return None
 
 
+# ================== DB HELPERS ==================
+def get_user_profile_from_db(uid):
+    """Fetches Condition, Meds, and Age from Firestore"""
+    default_profile = "Adult with General Respiratory Sensitivity. No specific meds."
+    
+    if not db or not uid:
+        return default_profile
+
+    try:
+        doc = db.collection('users').document(uid).get()
+        if doc.exists:
+            data = doc.to_dict()
+            name = data.get('name', 'User')
+            age = data.get('age', 'Adult')
+            condition = data.get('condition', 'General Sensitivity')
+            meds = data.get('medications', 'None')
+            return f"Patient Name: {name}, Age: {age}. Condition: {condition}. Current Medications: {meds}."
+        else:
+            return default_profile
+    except Exception as e:
+        print(f"DB Error: {e}")
+        return default_profile
 
 
 
@@ -183,16 +221,19 @@ CONTEXT:
 USER PROFILE:
 {user_profile}
 
-CURRENT AIR QUALITY:
+CURRENT AIR QUALITY (From today's check):
 {aqi_data}
+
+CHAT HISTORY:
+{history}
 
 QUESTION:
 {question}
 
 INSTRUCTIONS:
 1. Answer strictly based on the provided medical docs.
-2. Cite your sources explicitly (e.g., "The WHO Guidelines state...").
-3. If you don't know, say so.
+2. Cite your sources explicitly.
+3. If the user asks about going out, refer to the AQI data.
 
 RESPONSE:
 """
@@ -227,15 +268,16 @@ def build_advisory_chain(user_profile, aqi_data):
         | StrOutputParser()
     )
 
-def build_chat_chain(user_profile, aqi_data):
+def build_chat_chain(user_profile, aqi_data, history):
     return (
         {
             "context": retriever | format_docs,
             "question": RunnablePassthrough(),
             "user_profile": lambda _: user_profile,
             "aqi_data": lambda _: aqi_data,
+            "history": lambda _: history, # <--- Passes history to prompt
         }
-        | CHAT_PROMPT  # <--- Uses the normal chat prompt
+        | CHAT_PROMPT
         | llm
         | StrOutputParser()
     )
@@ -275,13 +317,32 @@ def save_turn(session_id, user_msg, ai_msg):                            #
 def get_advisory():
     data = request.json
 
+    # 1. GET INPUTS (Now expects uid)
+    uid = data.get("uid") 
     lat = data.get("lat")
     lon = data.get("lon")
-    user_profile = data.get("user_profile", "Healthy, no conditions")
 
+    # 2. FETCH USER PROFILE FROM DB (Backend Logic)
+    # We use the helper function to get the real medical data
+    user_profile = get_user_profile_from_db(uid)
+    print(f"👤 Generating Advisory for: {user_profile}")
+
+    # 3. FETCH LIVE AQI
     aqi_data = get_live_aqi(lat, lon)
     if not aqi_data:
         return jsonify({"error": "Failed to fetch AQI data"}), 500
+
+    # 4. SAVE AQI CONTEXT TO FIRESTORE (Crucial for Chatbot)
+    # This saves the 'latest_aqi' so the /ask-doctor endpoint can read it later
+    if db and uid:
+        try:
+            db.collection('users').document(uid).update({
+                "latest_aqi": aqi_data,
+                "latest_aqi_timestamp": datetime.datetime.now()
+            })
+            print("💾 AQI Context Saved to Firestore for Chatbot use")
+        except Exception as e:
+            print(f"⚠️ Failed to save AQI context: {e}")
 
     # Determine Category for context
     category = get_indian_aqi_category(aqi_data['indian_aqi'])
@@ -302,7 +363,7 @@ def get_advisory():
 
     raw_response = rag_chain.invoke(query)
 
-    # === JSON PARSING LOGIC ===
+    # === JSON PARSING LOGIC (KEPT EXACTLY AS YOU REQUESTED) ===
     try:
         # Gemini sometimes wraps JSON in ```json ... ``` markdown. Remove it.
         cleaned_response = raw_response.replace("```json", "").replace("```", "").strip()
@@ -322,36 +383,54 @@ def get_advisory():
 
 
 
-
 # =========================
 # API 2: ASK DOCTOR (CHAT) 
 # =========================
-
-@app.route("/ask-doctor", methods=["POST"])
+@app.route("/api/ask-doctor", methods=["POST"])
 def ask_doctor():
     data = request.json
-
-    session_id = data.get("session_id", "default")
+    
+    # 1. GET INPUTS
+    uid = data.get("uid")
     question = data.get("query")
-    user_profile = data.get("user_profile", "General Public")
-    aqi_context = data.get("aqi_context", "Unknown")
+    
+    # 2. FETCH USER PROFILE FROM DB (Backend Logic)
+    user_profile = get_user_profile_from_db(uid)
 
-    history = get_history(session_id)
+    # 3. FETCH SAVED AQI CONTEXT FROM DB
+    # The doctor needs to know the "context" of the environment
+    aqi_context = "Unknown. Tell user to check dashboard first."
+    
+    if db and uid:
+        try:
+            doc = db.collection('users').document(uid).get()
+            if doc.exists:
+                user_data = doc.to_dict()
+                # We retrieve the specific AQI data saved by the /get-advisory route
+                saved_aqi = user_data.get("latest_aqi")
+                if saved_aqi:
+                    aqi_context = str(saved_aqi)
+                    print("✅ Loaded Saved AQI Context for Chat")
+        except Exception as e:
+            print(f"⚠️ Could not load saved AQI: {e}")
 
-    # Convert history into text
-    history_text = "\n".join(
-        [f"User: {h['user']}\nAssistant: {h['assistant']}" for h in history]
-    )
+    # 4. GET & FORMAT CHAT HISTORY
+    # We use the UID as the session_id to keep history unique to the user
+    history = get_history(uid) 
+    history_text = "\n".join([f"User: {h['user']}\nAssistant: {h['assistant']}" for h in history])
 
+    # 5. RUN RAG CHAT
+    # This chain now has access to: Medical Docs (RAG) + User Profile + Live AQI + Chat History
     rag_chain = build_chat_chain(
-        user_profile=str(user_profile),
-        aqi_data=str(aqi_context),
+        user_profile=user_profile,
+        aqi_data=aqi_context,
         history=history_text
     )
 
     response = rag_chain.invoke(question)
 
-    save_turn(session_id, question, response)
+    # 6. SAVE CONVERSATION
+    save_turn(uid, question, response)
 
     return jsonify({"response": response})
 
@@ -359,9 +438,8 @@ def ask_doctor():
 
 
 
-
 import features
-features.register_routes(app, retriever, llm)
+features.register_routes(app, retriever, llm, db)
 
 
 if __name__ == "__main__":
