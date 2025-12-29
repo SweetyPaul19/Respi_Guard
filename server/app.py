@@ -14,7 +14,8 @@ from langchain_pinecone import PineconeVectorStore
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
-from langchain.memory import ConversationBufferWindowMemory # <-- short Memory for conversation history, last 4
+# from langchain.memory import ConversationBufferWindowMemory # OLD import
+# from langchain_core.memory import ConversationBufferWindowMemory # <-- short Memory for conversation history, last 4
 
 load_dotenv(override=True)
 app = Flask(__name__)
@@ -27,8 +28,6 @@ OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 PINECONE_INDEX_NAME = "respi-guard"
 
 # print("GOOGLE_API_KEY:", GOOGLE_API_KEY if GOOGLE_API_KEY else "NOT FOUND")
-
-
 
 
 ######################################################################################################################
@@ -121,20 +120,6 @@ def get_live_aqi(lat, lon):
         print(f"❌ [AQI HELPER CRASH]: {e}")
         return None
 
-    
-
-## 1st retrieve ->  format -> send to LLM! ### 
-
-# ================== HELPER FUNCTION FOR CONTEXT ==================
-def format_docs(docs):
-    # This combines the JSON chunks and adds the source tag for the LLM
-    formatted = []
-    for doc in docs:
-        source = doc.metadata.get("source", "Unknown Source")
-        formatted.append(f"CONTENT: {doc.page_content}\nSOURCE: {source}\n---")
-    return "\n".join(formatted)
-
-
 
 
 
@@ -178,6 +163,12 @@ RESPONSE:
 """
 )
 
+######################################################################################################################
+
+
+
+
+
 
 #Prompt API2
 CHAT_PROMPT = PromptTemplate.from_template(
@@ -207,6 +198,19 @@ RESPONSE:
 """
 )
 
+    
+
+## 1st retrieve ->  format -> send to LLM! ### 
+
+# ================== HELPER FUNCTION FOR CONTEXT ==================
+def format_docs(docs):
+    # This combines the JSON chunks and adds the source tag for the LLM
+    formatted = []
+    for doc in docs:
+        source = doc.metadata.get("source", "Unknown Source")
+        formatted.append(f"CONTENT: {doc.page_content}\nSOURCE: {source}\n---")
+    return "\n".join(formatted)
+
 
 
 # ================== RAG CHAIN updated to latest, ig, ig ==================
@@ -235,21 +239,24 @@ def build_chat_chain(user_profile, aqi_data):
         | llm
         | StrOutputParser()
     )
-######################################################################################################################
+
 
 
 
 #########################################################################
            # ====== MEMORY STORE FOR CHAT: API 2 ====== #      
-memory_store = {}                                                       #
+# Simple in-memory store                                                #
+conversation_store = {}                                                 #
+                                                                        #
                                                                         #            
-def get_memory(session_id):                                             #                                                                   
-    if session_id not in memory_store:                                  #                                        
-        memory_store[session_id] = ConversationBufferWindowMemory(      #                                                                         
-            k=4,                                                        #
-            return_messages=True                                        #
-        )                                                               #        
-    return memory_store[session_id]                                     #
+def get_history(session_id, k=4):                                       #
+    return conversation_store.get(session_id, [])[-k:]                  #
+                                                                        #
+                                                                        #                   
+def save_turn(session_id, user_msg, ai_msg):                            #
+    conversation_store.setdefault(session_id, []).append(               #
+        {"user": user_msg, "assistant": ai_msg}                         #    
+    )                                                                   #
 
 #########################################################################
 
@@ -320,7 +327,7 @@ def get_advisory():
 # API 2: ASK DOCTOR (CHAT) 
 # =========================
 
-@app.route("/api/ask-doctor", methods=["POST"])
+@app.route("/ask-doctor", methods=["POST"])
 def ask_doctor():
     data = request.json
 
@@ -329,16 +336,25 @@ def ask_doctor():
     user_profile = data.get("user_profile", "General Public")
     aqi_context = data.get("aqi_context", "Unknown")
 
-    memory = get_memory(session_id)
+    history = get_history(session_id)
+
+    # Convert history into text
+    history_text = "\n".join(
+        [f"User: {h['user']}\nAssistant: {h['assistant']}" for h in history]
+    )
 
     rag_chain = build_chat_chain(
         user_profile=str(user_profile),
         aqi_data=str(aqi_context),
-        memory=memory
+        history=history_text
     )
+
     response = rag_chain.invoke(question)
 
+    save_turn(session_id, question, response)
+
     return jsonify({"response": response})
+
 
 
 
