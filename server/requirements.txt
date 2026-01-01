@@ -4,9 +4,11 @@ flask-cors
 requests
 python-dotenv 
 langchain-google-genai 
+langchain-core
 langchain-community 
 langchain-pinecone
 pinecone-client
 firebase
 firebase-admin
 twilio
+gunicorn

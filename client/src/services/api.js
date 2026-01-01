@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_BASE = "http://localhost:5000/api";
+// const API_BASE = "http://localhost:5000/api";
+const API_BASE = import.meta.env.VITE_API_BASE;
+
 
 export const getAdvisory = async (payload) => {
   const res = await axios.post(`${API_BASE}/get-advisory`, payload);
@@ -20,4 +22,4 @@ export const saveUserProfile = async (payload) => {
 export const sendSOSAlert = async (payload) => {
   const res = await axios.post(`${API_BASE}/sos-alert`, payload);
   return res.data;
-};
+}; 
