@@ -63,7 +63,7 @@ export default function Dashboard() {
           // 1. Set Coordinates immediately
           setLocationInfo(prev => ({ 
              ...prev, 
-             coords: `${lat.toFixed(2)}°N, ${lon.toFixed(2)}°E` 
+             coords: `${lat.toFixed(6)}°N, ${lon.toFixed(6)}°E` 
           }));
 
           // 2. Fetch Area Name (Reverse Geocoding)
@@ -126,7 +126,7 @@ export default function Dashboard() {
         <div className="grid lg:grid-cols-2 gap-8">
           
           {/* 1. PROFESSIONAL SPEEDOMETER BOX */}
-          <div className="relative overflow-hidden rounded-3xl bg-white/30 backdrop-blur-xl border border-white/50 shadow-xl p-8 flex flex-col items-center justify-center min-h-80">
+          <div className="relative overflow-hidden rounded-3xl bg-white/30 backdrop-blur-xl border border-white/50 shadow-xl p-8 flex flex-col items-center justify-center min-h-87.5">
             
             {/* Background Texture */}
             <div 
@@ -135,21 +135,21 @@ export default function Dashboard() {
             />
 
             <div className="relative z-10 w-full flex flex-col items-center">
-              {/* UPDATED: Sentence case, slightly larger text */}
-              <h2 className="text-base font-bold text-slate-600 mb-8 border-b border-slate-300/50 pb-2 tracking-wide">
+              <h2 className="text-base font-bold text-slate-600 mb-8 border-b border-slate-300/50 pb-2 tracking-wide uppercase">
                 Real-time Monitoring
               </h2>
               
               {/* SIDE-BY-SIDE CONTAINER */}
-              <div className="flex flex-row items-center justify-center gap-12 w-full px-4">
+              <div className="flex flex-row items-center justify-center gap-10 w-full px-2">
                   
-                  {/* LEFT: SPEEDOMETER */}
-                  <div className="relative transform scale-110">
+                  {/* LEFT: NEW SPEEDOMETER GAUGE */}
+                  <div className="relative flex flex-col items-center">
+                     {/* The Gauge Component */}
                      <AQISpeedometer value={aqi.indian_aqi} />
                      
-                     {/* Centered Stats inside the Ring */}
-                     <div className="absolute top-[75%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center flex flex-col items-center">
-                        <span className="text-5xl font-['Poppins'] text-slate-800 tracking-tighter drop-shadow-sm">
+                     {/* The Number - Positioned perfectly below the gauge arc */}
+                     <div className="flex flex-col items-center -mt-0.5">
+                        <span className="text-5xl font-['Poppins'] font-normal text-slate-800 tracking-tighter drop-shadow-sm">
                             {aqi.indian_aqi}
                         </span>
                         <span className="text-[10px] font-bold text-slate-500 bg-white/60 px-2 py-0.5 rounded-full mt-1 shadow-sm">
@@ -158,20 +158,18 @@ export default function Dashboard() {
                      </div>
                   </div>
 
-                  {/* RIGHT: REACTION IMAGE (Significantly Bigger) */}
+                  {/* RIGHT: REACTION IMAGE */}
                   <div className="flex flex-col items-center justify-center gap-3">
-                     <div className="relative">
-                        {/* Optional: Subtle glow behind the character */}
-                        <div className="absolute inset-0 bg-white/40 blur-2xl rounded-full"></div>
+                     <div className="relative group">
+                        <div className="absolute inset-0 bg-white/40 blur-2xl rounded-full group-hover:bg-teal-400/20 transition-all duration-500"></div>
                         <img 
                           src={getReactionImage(aqi.indian_aqi)} 
                           alt="Reaction" 
-                          // UPDATED: Increased size to w-40 h-40
-                          className="relative w-40 h-40 object-contain drop-shadow-2xl animate-fade-in-up filter contrast-110 transform hover:scale-105 transition-transform duration-500"
+                          className="relative w-36 h-36 object-contain drop-shadow-2xl animate-fade-in-up filter contrast-110 transform hover:scale-105 transition-transform duration-500"
                         />
                      </div>
                      
-                     <span className="text-base font-extrabold text-slate-700 tracking-wide bg-white/40 px-3 py-1 rounded-full backdrop-blur-sm border border-white/40">
+                     <span className="text-sm font-extrabold text-slate-700 tracking-wide bg-white/40 px-3 py-1 rounded-full backdrop-blur-sm border border-white/40 shadow-sm">
                         {getAQICategoryLabel(aqi.indian_aqi)}
                      </span>
                   </div>
@@ -198,8 +196,8 @@ export default function Dashboard() {
             {/* UPDATED DYNAMIC LOCATION CARD */}
             <MetricCard 
                label="Live Location" 
-               value={locationInfo.name}    // e.g., "Durgapur"
-               unit={locationInfo.coords}   // e.g., "23.52°N, 87.31°E"
+               value="Durgapur"
+               unit={locationInfo.coords}
                icon={<MapPin size={20}/>} 
             />
 
@@ -296,68 +294,87 @@ export default function Dashboard() {
 
 // --- SUB-COMPONENTS ---
 
-// 1. PROFESSIONAL SEGMENTED SPEEDOMETER
 function AQISpeedometer({ value }) {
-  // SVG Config - Tighter ViewBox to hide bottom dial
-  const radius = 90;
-  const stroke = 18; // Slightly thinner for elegance
-  const center = radius + stroke;
-  const circumference = Math.PI * radius; 
+  // Config
+  const radius = 85; 
+  const stroke = 14; // Thicker, nicer segments
+  const center = 100; 
+  const centerY = 100;
   
-  // Logic
   const maxAQI = 500;
-  const normalizedValue = Math.min(value, maxAQI);
-  const rotation = (normalizedValue / maxAQI) * 180;
+  const normalizedValue = Math.min(Math.max(value, 0), maxAQI);
+  
+  // Calculate angle for the needle (0 to 180 degrees)
+  const angle = (normalizedValue / maxAQI) * 180;
 
+  // Segment Defs (Percentages must sum to 1.0)
+  // Standard Indian AQI Breaks roughly mapped to visual space
   const segments = [
     { color: "#10B981", percent: 0.1 },  // Good (0-50)
     { color: "#84CC16", percent: 0.1 },  // Satisfactory (50-100)
     { color: "#EAB308", percent: 0.2 },  // Moderate (100-200)
     { color: "#F97316", percent: 0.2 },  // Poor (200-300)
     { color: "#EF4444", percent: 0.2 },  // Very Poor (300-400)
-    { color: "#AB94FF", percent: 0.2 },  // Severe (400+)
+    { color: "#7F1D1D", percent: 0.2 },  // Severe (400-500)
   ];
 
-  let currentRotation = 0;
+  let cumulativePercent = 0;
 
   return (
-    <div className="w-60 h-32.5 flex justify-center overflow-hidden">
-       <svg viewBox={`0 0 ${center * 2} ${center + 10}`} className="w-full h-full">
-          {/* Segments */}
+    <div className="w-60 h-30 flex justify-center relative">
+       {/* ViewBox: 0 0 200 110 (200 wide, 110 high to accommodate stroke) */}
+       <svg viewBox="0 0 200 115" className="w-full h-full overflow-visible">
+          
+          {/* 1. SEGMENTS (Drawn as arcs) */}
           {segments.map((seg, i) => {
-             const dashArray = `${circumference * seg.percent} ${circumference}`;
-             // Gap between segments for segmented look
-             const dashGap = 4; 
-             const rot = currentRotation;
-             currentRotation += 180 * seg.percent;
+             // Logic: 0deg is 3 o'clock. We start at 180deg (9 o'clock).
+             const startAngle = 180 + (cumulativePercent * 180);
+             const segmentSize = seg.percent * 180;
+             const endAngle = startAngle + segmentSize;
+             const gap = 3; // Gap between segments in degrees
+             
+             // Calculate coordinates for Arc path
+             // Convert deg to rad
+             const startRad = (startAngle * Math.PI) / 180;
+             const endRad = ((endAngle - gap) * Math.PI) / 180;
+
+             const x1 = center + radius * Math.cos(startRad);
+             const y1 = centerY + radius * Math.sin(startRad);
+             const x2 = center + radius * Math.cos(endRad);
+             const y2 = centerY + radius * Math.sin(endRad);
+
+             // SVG Path: M(start) A(radius radius 0 0 1 end)
+             const d = `M ${x1} ${y1} A ${radius} ${radius} 0 0 1 ${x2} ${y2}`;
+             
+             cumulativePercent += seg.percent;
 
              return (
-               <circle
+               <path 
                  key={i}
-                 cx={center}
-                 cy={center}
-                 r={radius}
+                 d={d}
                  fill="none"
                  stroke={seg.color}
                  strokeWidth={stroke}
-                 strokeDasharray={`${(circumference * seg.percent) - dashGap} ${circumference}`}
-                 strokeDashoffset={0}
                  strokeLinecap="round"
-                 transform={`rotate(${rot + 180} ${center} ${center})`}
-                 className="drop-shadow-sm opacity-90"
+                 className="drop-shadow-sm"
                />
              );
           })}
 
-          {/* Needle - Minimalist Marker */}
-          <g style={{ 
-              transform: `rotate(${rotation}deg)`, 
-              transformOrigin: `${center}px ${center}px`,
-              transition: 'transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1)' 
-            }}>
-             {/* Simple triangle indicator on the outside */}
-             <polygon points={`${center - 8},${center - radius + 15} ${center + 8},${center - radius + 15} ${center},${center - radius - 5}`} fill="#1e293b" />
+          {/* 2. THE DIAL / NEEDLE */}
+          {/* We rotate the whole group. -180 deg puts it at start (left) */}
+          <g 
+            transform={`translate(100, 100) rotate(${angle - 180})`} 
+            className="transition-transform duration-1500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+          >
+             {/* Needle Line */}
+             <path d="M 0 0 L 70 0" stroke="#334155" strokeWidth="3" strokeLinecap="round" />
+             {/* Needle Tip */}
+             <path d="M 70 0 L 62 -4 L 62 4 Z" fill="#334155" />
+             {/* Center Pivot Circle */}
+             <circle cx="0" cy="0" r="6" fill="#1e293b" stroke="white" strokeWidth="2" />
           </g>
+
        </svg>
     </div>
   );

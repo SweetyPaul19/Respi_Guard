@@ -20,7 +20,8 @@ export default function Navbar() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-3 bg-white/10 backdrop-blur-md border-b border-white/30 shadow-sm transition-all duration-300">
+    // <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-3 bg-white/10 backdrop-blur-md border-b border-white/30 shadow-sm transition-all duration-300">
+    <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-3 bg-white/10 backdrop-blur-md transition-all duration-300">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
 
         {/* LOGO */}
